@@ -1,11 +1,9 @@
 package com.mattswart.realtimeweatherservice.client;
 
-import com.mattswart.realtimeweatherservice.dto.GeoCityDetails;
+import com.mattswart.realtimeweatherservice.dto.openweather.GeoCityDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-
-import java.util.ArrayList;
 
 @Component
 public class GeocodingApiClient {
@@ -35,8 +33,7 @@ public class GeocodingApiClient {
 
         if (cities != null && cities.length > 0) {
             return cities[0];
-        }
-        else
+        } else
             return null;
     }
 

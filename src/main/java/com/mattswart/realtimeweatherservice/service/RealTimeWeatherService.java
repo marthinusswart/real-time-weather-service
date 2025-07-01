@@ -1,7 +1,9 @@
 package com.mattswart.realtimeweatherservice.service;
 
 import com.mattswart.realtimeweatherservice.client.GeocodingApiClient;
-import com.mattswart.realtimeweatherservice.dto.GeoCityDetails;
+import com.mattswart.realtimeweatherservice.client.OpenWeatherApiClient;
+import com.mattswart.realtimeweatherservice.dto.openweather.GeoCityDetails;
+import com.mattswart.realtimeweatherservice.dto.openweather.OpenWeatherResponse;
 import com.mattswart.realtimeweatherservice.dto.RTWCityWeather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +16,16 @@ public class RealTimeWeatherService {
     @Autowired
     private GeocodingApiClient geocodingApiClient;
 
+    @Autowired
+    private OpenWeatherApiClient openWeatherApiClient;
+
     // Example method to get current weather by city name
     public RTWCityWeather getCurrentWeatherByCity(String cityName, String countryCode) {
         GeoCityDetails cityDetails = geocodingApiClient.getCityDetails(cityName, countryCode);
-        System.out.println(String.format("City Details: %s, %s, %f, %f",
-                cityDetails.name(), cityDetails.country(), cityDetails.lat(), cityDetails.lon()));
-        RTWCityWeather cityWeather = new RTWCityWeather(cityName, countryCode, 0.0);
+        //System.out.println(String.format("City Details: %s, %s, %f, %f",
+        //        cityDetails.name(), cityDetails.country(), cityDetails.lat(), cityDetails.lon()));
+        OpenWeatherResponse openWeatherDetails = openWeatherApiClient.getCityDetails(cityDetails.lat(), cityDetails.lon());
+        RTWCityWeather cityWeather = new RTWCityWeather(cityName, countryCode, openWeatherDetails.main().temp());
         return cityWeather;
     }
 

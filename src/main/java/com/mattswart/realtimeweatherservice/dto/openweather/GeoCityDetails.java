@@ -1,4 +1,4 @@
-package com.mattswart.realtimeweatherservice.dto;
+package com.mattswart.realtimeweatherservice.dto.openweather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
