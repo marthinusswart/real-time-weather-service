@@ -1,0 +1,11 @@
+meta {
+  name: Get City Weather
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:9191/real_time_weather_service/v1/weatherByCity/Pretoria/ZA
+  body: none
+  auth: inherit
+}

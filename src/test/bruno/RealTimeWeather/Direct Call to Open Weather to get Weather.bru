@@ -1,0 +1,18 @@
+meta {
+  name: Direct Call to Open Weather to get Weather
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://api.openweathermap.org/data/2.5/weather?lat=-25.7459277&lon=28.1879101&units=metric&appid=
+  body: none
+  auth: inherit
+}
+
+params:query {
+  lat: -25.7459277
+  lon: 28.1879101
+  units: metric
+  appid:
+}

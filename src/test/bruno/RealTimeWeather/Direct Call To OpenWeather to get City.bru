@@ -1,0 +1,17 @@
+meta {
+  name: Direct Call To OpenWeather to get City
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://api.openweathermap.org/geo/1.0/direct?q=Pretoria,ZA&limit=1&appid=
+  body: none
+  auth: inherit
+}
+
+params:query {
+  q: Pretoria,ZA
+  limit: 1
+  appid:
+}
