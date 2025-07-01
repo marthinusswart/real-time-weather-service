@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/real_time_weather_service/v1")
 public class RealTimeWeatherServiceController {
-    @Value("${openweathermap.OPEN_WEATHER_MAP_API_KEY}")
+    @Value("${OPEN_WEATHER_MAP_API_KEY}")
     private String openWeatherMapApiKey;
 
     @Value("${openweathermap.OPEN_WEATHER_MAP_API_URL}")
@@ -36,7 +36,11 @@ public class RealTimeWeatherServiceController {
 
     @GetMapping("/health")
     public RTWStatus healthCheck() {
-        return new RTWStatus("OK", "Real-Time Weather Service is running!");
+        return new RTWStatus("OK",
+                String.format("Real-Time Weather Service is running! API Key: %s, API URL: %s",
+                        openWeatherMapApiKey, openWeatherMapApiUrl)
+        );
+
     }
 
     /**
@@ -45,10 +49,10 @@ public class RealTimeWeatherServiceController {
      * @param cityName the name of the city for which to retrieve the weather
      * @return RTWCityWeather containing the current weather data for the specified city
      */
-    @GetMapping("/weatherByCity/{cityName}")
-    public RTWCityWeather getCurrentWeatherByCity(@PathVariable String cityName) {
+    @GetMapping("/weatherByCity/{cityName}/{countryCode}")
+    public RTWCityWeather getCurrentWeatherByCity(@PathVariable String cityName, @PathVariable String countryCode) {
         // Call the service to get the current weather by city name
-        RTWCityWeather result = realTimeWeatherService.getCurrentWeatherByCity(cityName);
+        RTWCityWeather result = realTimeWeatherService.getCurrentWeatherByCity(cityName, countryCode);
         return result;
     }
 }
