@@ -5,5 +5,19 @@
   "ignore": [
     "node_modules",
     ".git"
-  ]
+  ],
+  "size": 0.0009784698486328125,
+  "filesCount": 4,
+  "proxy": {
+    "bypassProxy": "localhost",
+    "enabled": "global",
+    "auth": {
+      "enabled": false,
+      "username": "",
+      "password": ""
+    },
+    "port": null,
+    "hostname": "",
+    "protocol": "http"
+  }
 }

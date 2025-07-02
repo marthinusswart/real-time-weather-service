@@ -15,13 +15,20 @@ public class GeocodingApiClient {
 
     public GeocodingApiClient(RestClient.Builder builder,
                               @Value("${OPEN_WEATHER_MAP_API_KEY}") String openWeatherMapApiKey,
-                              @Value("${openweathermap.OPEN_WEATHER_GEO_API_URL}") String openWeatherMapGeoApiUrl) {
+                              @Value("${openweathermap.OPEN_WEATHER_GEO_API_URL}") String openWeatherMapGeoApiUrl,
+                              @Value("${mockopenweathermap.OPEN_WEATHER_GEO_API_URL}") String mockOpenWeatherMapGeoApiUrl,
+                              @Value("${runtime.apimode}") String apiMode) {
         // Initialize the RestClient with the base URL for the OpenWeatherMap Geo API
+        String apiUrl = openWeatherMapGeoApiUrl;
+
+        if (apiMode.equalsIgnoreCase("mock")) {
+            apiUrl = mockOpenWeatherMapGeoApiUrl;
+        }
         this.restClient = builder
-                .baseUrl(openWeatherMapGeoApiUrl)
+                .baseUrl(apiUrl)
                 .build();
         this.openWeatherMapApiKey = openWeatherMapApiKey;
-        this.openWeatherMapGeoApiUrl = openWeatherMapGeoApiUrl;
+        this.openWeatherMapGeoApiUrl = apiUrl;
     }
 
     public GeoCityDetails getCityDetails(String cityName, String countryCode) {

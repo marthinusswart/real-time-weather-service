@@ -22,9 +22,7 @@ public class RealTimeWeatherService {
     // Example method to get current weather by city name
     public RTWCityWeather getCurrentWeatherByCity(String cityName, String countryCode) {
         GeoCityDetails cityDetails = geocodingApiClient.getCityDetails(cityName, countryCode);
-        //System.out.println(String.format("City Details: %s, %s, %f, %f",
-        //        cityDetails.name(), cityDetails.country(), cityDetails.lat(), cityDetails.lon()));
-        OpenWeatherResponse openWeatherDetails = openWeatherApiClient.getCityDetails(cityDetails.lat(), cityDetails.lon());
+        OpenWeatherResponse openWeatherDetails = openWeatherApiClient.getCityWeatherDetails(cityDetails.lat(), cityDetails.lon());
         RTWCityWeather cityWeather = new RTWCityWeather(cityName, countryCode, openWeatherDetails.main().temp());
         return cityWeather;
     }
