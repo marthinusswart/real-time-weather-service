@@ -10,4 +10,4 @@ mockopenweathermap:
   OPEN_WEATHER_GEO_API_URL: http://localhost:9192/openweatherapi/v1
 
 runtime:
-  apimode: mock
+  apimode: live

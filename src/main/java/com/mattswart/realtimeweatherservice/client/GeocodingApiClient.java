@@ -32,16 +32,17 @@ public class GeocodingApiClient {
     }
 
     public GeoCityDetails getCityDetails(String cityName, String countryCode) {
-        //System.out.println(String.format("the Uri: /direct?q={%s},{%s}&limit=1&appid={%s}", cityName, countryCode, openWeatherMapApiKey));
+        String apiUri = String.format("/direct?q=%s,%s&limit=1&appid=%s", cityName, countryCode, openWeatherMapApiKey);
         var cities = restClient.get()
-                .uri("/direct?q={cityName},{countryCode}&limit=1&appid={openWeatherMapApiKey}", cityName, countryCode, openWeatherMapApiKey)
+                .uri(apiUri)
                 .retrieve()
                 .body(GeoCityDetails[].class);
 
         if (cities != null && cities.length > 0) {
             return cities[0];
-        } else
+        } else {
             return null;
+        }
     }
 
 
